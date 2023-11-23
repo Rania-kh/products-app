@@ -52,6 +52,8 @@ function RootLayoutNav() {
       <Provider store={store}>
         <Stack>
           <Stack.Screen name="index" options={{ headerShown: false, presentation: 'modal' }} />
+          <Stack.Screen name="product/[id]" getId={({ params }) => String(Date.now())}
+          />
         </Stack>
       </Provider>
     </ThemeProvider>

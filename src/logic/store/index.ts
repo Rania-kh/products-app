@@ -6,3 +6,6 @@ export const store = configureStore({
         content: productsSlice,
     },
 })
+
+export type RootState = ReturnType<typeof store.getState>
+export type AppDispatch = typeof store.dispatch

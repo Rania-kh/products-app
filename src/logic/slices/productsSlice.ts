@@ -1,6 +1,9 @@
 
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
-import axios from 'axios'
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import axios from 'axios';
+
+export type Product = { id: number; title: string; image: string; price: string }
+type SliceState = { products: Product[]; isLoading: boolean; error: string }
 
 const initialState = {
     products: [],
@@ -17,13 +20,13 @@ export const fetchProducts = createAsyncThunk(
             }
         })
         const data = await res.data
-        return data
+        return data as Product[]
     }
 )
 
 export const productsSlice = createSlice({
     name: 'content',
-    initialState,
+    initialState: initialState as SliceState,
     reducers: {},
     extraReducers: (builder) => {
         builder.addCase(fetchProducts.pending, (state) => {
