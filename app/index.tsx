@@ -1,9 +1,27 @@
 import { StyleSheet } from 'react-native';
 
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Text, View } from '../src/components/Themed';
+import { fetchProducts } from '../src/logic/slices/productsSlice';
 
 export default function Products() {
+  const dispatch = useDispatch()
 
+  useEffect(() => {
+    dispatch(fetchProducts())
+  }, [dispatch])
+
+  const products = useSelector((state) => state.content.products)
+  const isLoading = useSelector((state) => state.content.isLoading)
+  const error = useSelector((state) => state.content.error)
+  if (isLoading) {
+    return <Text>{'loading...'}</Text>
+  }
+
+  if (error) {
+    return error
+  }
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Products</Text>
