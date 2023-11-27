@@ -14,10 +14,10 @@ const initialState = {
 
 export const fetchProducts = createAsyncThunk(
     'content/fetchProducts',
-    async (x: number) => {
+    async () => {
         const res = await axios('https://fakestoreapi.com/products', {
             params: {
-                _limit: 10 + x
+                _limit: 10
             }
         })
         const data = await res.data

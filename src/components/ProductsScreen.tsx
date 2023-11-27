@@ -1,10 +1,10 @@
 import { ThunkDispatch } from "@reduxjs/toolkit";
 import { useRouter } from "expo-router";
-import React from "react";
+import React, { useState } from "react";
 import { TouchableHighlight } from "react-native";
-import { FlatList } from "react-native-gesture-handler";
+import { FlatList, RefreshControl } from "react-native-gesture-handler";
 import { useDispatch } from "react-redux";
-import { Product, setProductDetails } from "../logic/slices/productsSlice";
+import { Product, fetchProducts, setProductDetails } from "../logic/slices/productsSlice";
 import { Image } from "./StyledImage";
 import { MonoText } from "./StyledText";
 import { StyledView, Text } from "./Themed";
@@ -30,11 +30,24 @@ const RenderCard = ({ item }: { item: Product }) => {
 };
 
 export const ProductsScreenDetails: React.FC<{ products: Product[] }> = ({ products }) => {
+    const [refresh, setrefresh] = useState(false)
+    const dispatch = useDispatch<ThunkDispatch<any, any, any>>();
     return (
         <FlatList
             data={products} numColumns={2} horizontal={false} style={{ width: '100%' }} contentContainerStyle={{ alignItems: 'center' }}
             renderItem={({ item, index, separators }) => <RenderCard item={item} />}
             keyExtractor={(item, index) => item.id.toString() + index} // Use your unique identifier
+            onRefresh={() => setrefresh(true)}
+            refreshing={refresh}
+            refreshControl={
+                <RefreshControl
+                    refreshing={refresh}
+                    onRefresh={() => {
+                        dispatch(fetchProducts())
+                        setrefresh(false)
+                    }}
+                />
+            }
         />
     )
 }
