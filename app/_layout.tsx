@@ -12,10 +12,6 @@ export {
   ErrorBoundary
 } from 'expo-router';
 
-// export const unstable_settings = {
-//   // Ensure that reloading on `/products` keeps a back button present.
-//   initialRouteName: 'products',
-// };
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
@@ -51,9 +47,12 @@ function RootLayoutNav() {
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
       <Provider store={store}>
         <Stack>
-          <Stack.Screen name="index" options={{ headerShown: false, presentation: 'modal' }} />
-          <Stack.Screen name="product/[id]" getId={({ params }) => String(Date.now())}
-          />
+          <Stack.Screen name="index" options={{
+            headerShown: false,
+            animationTypeForReplace: 'pop', animation: 'slide_from_right'
+
+          }} />
+          <Stack.Screen name="product/[id]" getId={({ params }) => String(Date.now())} options={{ title: 'Product Details', animationTypeForReplace: 'pop', animation: 'slide_from_right' }} />
         </Stack>
       </Provider>
     </ThemeProvider>

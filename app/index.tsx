@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { StyleSheet } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { ProductsScreenDetails } from '../src/components/ProductsScreen';
-import { Text, View } from '../src/components/Themed';
+import { StyledView, Text } from '../src/components/Themed';
 import { fetchProducts } from '../src/logic/slices/productsSlice';
 import { RootState } from '../src/logic/store';
 
@@ -25,11 +25,10 @@ export default function Products() {
     return error
   }
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Products</Text>
-      <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
+    <StyledView style={styles.container}>
+      {/* <StyledView style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" /> */}
       <ProductsScreenDetails products={products} />
-    </View>
+    </StyledView>
   );
 }
 
@@ -38,14 +37,6 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  title: {
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
-  separator: {
-    marginVertical: 15,
-    height: 1,
-    width: '80%',
+    paddingTop: 20
   },
 });
