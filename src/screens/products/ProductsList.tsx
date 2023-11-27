@@ -1,21 +1,21 @@
 import { ThunkDispatch } from "@reduxjs/toolkit";
 import { useRouter } from "expo-router";
 import React, { useState } from "react";
-import { TouchableHighlight } from "react-native";
+import { TouchableOpacity } from "react-native";
 import { FlatList, RefreshControl } from "react-native-gesture-handler";
 import { useDispatch } from "react-redux";
-import { Product, fetchProducts, setProductDetails } from "../logic/slices/productsSlice";
-import { Image } from "./StyledImage";
-import { MonoText } from "./StyledText";
-import { StyledView, Text } from "./Themed";
+import { Image } from "../../components/StyledImage";
+import { MonoText } from "../../components/StyledText";
+import { StyledView, Text } from "../../components/Themed";
+import { Product, fetchProducts, setProductDetails } from "../../logic/slices/productsSlice";
 
 const RenderCard = ({ item }: { item: Product }) => {
     const dispatch = useDispatch<ThunkDispatch<any, any, any>>();
     const router = useRouter();
 
     return (
-        <TouchableHighlight
-            style={{ marginVertical: 10, width: '45%' }}
+        <TouchableOpacity
+            style={{ paddingVertical: 10, width: '50%' }}
             onPress={() => {
                 dispatch(setProductDetails(item))
                 router.push(`/product/${item.id}`)
@@ -25,11 +25,11 @@ const RenderCard = ({ item }: { item: Product }) => {
                 <MonoText>{item.price} $</MonoText>
                 <Text>{item.title}</Text>
             </StyledView>
-        </TouchableHighlight>
+        </TouchableOpacity>
     );
 };
 
-export const ProductsScreenDetails: React.FC<{ products: Product[] }> = ({ products }) => {
+export const ProductsList: React.FC<{ products: Product[] }> = ({ products }) => {
     const [refresh, setrefresh] = useState(false)
     const dispatch = useDispatch<ThunkDispatch<any, any, any>>();
     return (
@@ -38,6 +38,7 @@ export const ProductsScreenDetails: React.FC<{ products: Product[] }> = ({ produ
             renderItem={({ item, index, separators }) => <RenderCard item={item} />}
             keyExtractor={(item, index) => item.id.toString() + index} // Use your unique identifier
             onRefresh={() => setrefresh(true)}
+            showsVerticalScrollIndicator={false}
             refreshing={refresh}
             refreshControl={
                 <RefreshControl

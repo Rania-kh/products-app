@@ -6,6 +6,7 @@ import {
 import { StyledView } from "./Themed";
 
 const RectangleSkeleton = () => <PlaceholderMedia style={{ width: '45%', height: 200, marginTop: 20 }} />
+
 export const Skeleton = () => {
     var rectangles = Array(8).fill(['']);
     return (

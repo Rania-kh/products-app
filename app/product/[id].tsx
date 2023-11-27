@@ -15,11 +15,11 @@ export default function Products() {
             <Image source={{ uri: productDetails?.image }} />
             <MonoText>{productDetails?.price} $</MonoText>
             <Text style={styles.title}>{productDetails?.title}</Text>
-            <View style={{ flexDirection: 'row', gap: 10 }}>
+            <View style={{ flexDirection: 'row', gap: 10, marginTop: 15 }}>
                 <Text style={styles.subTitle}>category</Text>
                 <Text>{productDetails?.category}</Text>
             </View>
-            <Text style={{ marginTop: 15 }}>{productDetails?.description}</Text>
+            <Text style={{ marginTop: 8 }}>{productDetails?.description}</Text>
         </StyledView>
     );
 }

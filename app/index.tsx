@@ -2,11 +2,11 @@ import { ThunkDispatch } from '@reduxjs/toolkit';
 import { useEffect } from 'react';
 import { StyleSheet } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
-import { ProductsScreenDetails } from '../src/components/ProductsScreen';
 import { Skeleton } from '../src/components/Skeleton';
 import { StyledView } from '../src/components/Themed';
 import { fetchProducts } from '../src/logic/slices/productsSlice';
 import { RootState } from '../src/logic/store';
+import { ProductsList } from '../src/screens/products/ProductsList';
 
 export default function Products() {
   const dispatch = useDispatch<ThunkDispatch<any, any, any>>();
@@ -27,7 +27,7 @@ export default function Products() {
   }
   return (
     <StyledView style={styles.container}>
-      <ProductsScreenDetails products={products} />
+      <ProductsList products={products} />
     </StyledView>
   );
 }
