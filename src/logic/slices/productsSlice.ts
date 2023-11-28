@@ -17,7 +17,7 @@ export const fetchProducts = createAsyncThunk(
     async () => {
         const res = await axios('https://fakestoreapi.com/products', {
             params: {
-                _limit: 10
+                _limit: 50
             }
         })
         const data = await res.data
