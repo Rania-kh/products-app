@@ -13,7 +13,7 @@ This is a mobile application developed with React Native using Expo. It showcase
 ## Getting Started
 
 1. **Clone the repository:**
-git clone https://github.com/your-username/product-list-app.git
+git clone https://github.com/Rania-kh/products-app.git
 cd product-list-app
 
 
